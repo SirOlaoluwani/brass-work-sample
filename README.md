@@ -2,15 +2,31 @@
 
 ## Task Description
 
-This task is designed to provide an opportunity for you to demonstrate your skills as
-a Mobile Engineer by creating a simple mobile application applying your knowledge
-of React Native & TypeScript in the sense that you:
-1. write clean, structured, readable and maintainable code
-2. create simple application components and building blocks
-3. apply optimisations that smooth out communications & data exchange with
-external APIs
-4. maintain a well designed application state
-5. craft a pleasant user experience
+We are a software development company that a client reached out to to help build a
+single page bank web application that provides some basic features for their
+customers.
+Their desired features are:
+1. An interface for creating a new payment (that is, fund transfers)
+
+    a. It allows the customer select the bank and provide the destination account
+number (the account number must be validated before proceeding)
+
+    b. It allows the user enter an amount that is bound by the rules on ≥ 100 and ≤
+10,000,000
+
+    c. Sends the payment information to the API for processing
+
+2. An interface that allows a user see all payments they've ever created and view
+the details on any one that's selected
+They have requested that we use a payment gateway provider in Nigeria (e.g.
+Paystack, Flutterwave).
+Requirements
+The payment gateway of your choice needs to have a publicly accessible API
+documentation
+The routes and design is entirely up to you (you can keep things simple)
+Keep your application source code on a public Github repository
+Provide a live demo URL for your sample app (you can deploy your app to Expo)
+
 
 ## Installation
 
