@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "brass-work-sample",
-    "slug": "brass-work-sample",
+    "name": "Simple Pay",
+    "slug": "simple-pay",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

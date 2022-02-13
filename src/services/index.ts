@@ -1,5 +1,5 @@
 import { BASE_URL } from "@env";
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 // Axios Config
 axios.defaults.baseURL = BASE_URL;
