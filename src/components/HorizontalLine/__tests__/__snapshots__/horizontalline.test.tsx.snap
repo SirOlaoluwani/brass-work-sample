@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HorizontalLine /> matches the snapshot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#9e9e9e47",
+      "height": 1,
+    }
+  }
+/>
+`;

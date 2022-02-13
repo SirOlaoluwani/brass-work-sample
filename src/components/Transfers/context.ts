@@ -1,27 +1,20 @@
 import { useContext, createContext } from "react";
-import {
-  QueryObserverBaseResult,
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-  UseQueryResult,
-} from "react-query";
 
 // Types
-import { Transfer, TransferServerData } from "src/types/transfers";
+import { Transfer } from "src/types/transfers";
 
-interface TransfersContextProps {
+export interface TransfersContextProps {
   transfers?: Array<Transfer>;
-  isLoadingTransfers: boolean;
-  onTransferItemPress: (details: Transfer) => void;
-  transferQueryStatus: "idle" | "error" | "loading" | "success";
-  transferQueryError: Error | null;
-  transferQueryRefetch: () => void;
-  loadMore: () => void;
-  isFetchingNextPage: boolean;
+  isLoadingTransfers?: boolean;
+  onTransferItemPress?: (details: Transfer) => void;
+  transferQueryStatus?: "idle" | "error" | "loading" | "success";
+  transferQueryError?: Error | null;
+  transferQueryRefetch?: () => void;
+  loadMore?: () => void;
+  isFetchingNextPage?: boolean;
 }
 
-const defaultValue: TransfersContextProps = {
+export const defaultValue: TransfersContextProps = {
   transfers: [],
   isLoadingTransfers: false,
   onTransferItemPress: () => {},

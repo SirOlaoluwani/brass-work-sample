@@ -39,24 +39,28 @@ const TransfersList = () => {
   }) => {
     return (
       <TransferCard
-        onPress={() => onTransferItemPress(item)}
+        onPress={() => onTransferItemPress && onTransferItemPress(item)}
         amount={`${item.amount}`}
         recipientName={item.recipient.name}
         status={item.status}
         date={item.createdAt}
         key={index}
+        index={index}
       />
     );
   };
 
   if (transferQueryStatus === "loading") {
-    return <ActivityIndicator animating />;
+    return <ActivityIndicator animating testID="loading-indicator" />;
   }
 
   if (transferQueryStatus === "error") {
     return (
       <View style={styles.errorContainer}>
-        <Text>Error fetching transactions: {transferQueryError?.message}</Text>
+        <Text>
+          Error fetching transactions:{" "}
+          <Text testID="error-text">{transferQueryError?.message}</Text>
+        </Text>
         <Text onPress={transferQueryRefetch} style={styles.retryText}>
           Try again
         </Text>
@@ -73,6 +77,7 @@ const TransfersList = () => {
       ListFooterComponent={() => {
         return <ActivityIndicator animating={isFetchingNextPage} />;
       }}
+      testID="transferFlatlistId"
     />
   );
 };

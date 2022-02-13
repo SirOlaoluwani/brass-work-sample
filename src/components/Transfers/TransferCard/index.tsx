@@ -16,13 +16,16 @@ export type TransferCardProps = {
   status: string;
   date: string;
   onPress: () => void;
+  index: number;
 };
 
-const TransferCardBody = ({ title, value }: TransferCardBodyProps) => {
+export const TransferCardBody = ({ title, value }: TransferCardBodyProps) => {
   return (
     <View style={styles.row}>
-      <Text style={styles.rowTitle}>{title}</Text>
-      <Text numberOfLines={1} ellipsizeMode="middle">
+      <Text style={styles.rowTitle} testID="card-body-title">
+        {title}
+      </Text>
+      <Text numberOfLines={1} ellipsizeMode="middle" testID="card-body-value">
         {value}
       </Text>
     </View>
@@ -31,7 +34,11 @@ const TransferCardBody = ({ title, value }: TransferCardBodyProps) => {
 
 const TransferCard = (props: TransferCardProps) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={props.onPress}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={props.onPress}
+      testID="transferCardId"
+    >
       <TransferCardBody title="Amount" value={formatNaira(props.amount)} />
       <TransferCardBody title="Recipient" value={props.recipientName} />
       <TransferCardBody title="Status" value={props.status} />

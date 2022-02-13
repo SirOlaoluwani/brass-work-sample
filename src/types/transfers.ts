@@ -42,7 +42,7 @@ export interface Transfer {
   reference: string;
   source: string;
   source_details: unknown | null;
-  status: "success" | "failed" | "abandoned" | "pending";
+  status: "success" | "failed" | "abandoned" | "pending" | string;
   titan_code: unknown | null;
   transfer_code: string;
   transferred_at: unknown | null;

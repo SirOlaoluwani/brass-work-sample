@@ -9,14 +9,25 @@ interface CardProps {
   onPress?: () => void;
 }
 
+interface TouchableCardTextProps {
+  text?: string;
+}
+
+export const TouchableCardText = (props: TouchableCardTextProps) => {
+  return props?.text ? (
+    <Text style={styles.cardText}>{props?.text}</Text>
+  ) : null;
+};
+
 const TouchableCard = (props: CardProps) => {
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={props?.onPress}
       activeOpacity={0.5}
+      testID="touchableCardTestId"
     >
-      {props?.text && <Text style={styles.cardText}>{props?.text}</Text>}
+      <TouchableCardText text={props?.text} />
     </TouchableOpacity>
   );
 };

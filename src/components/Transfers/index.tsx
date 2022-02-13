@@ -2,7 +2,7 @@ import React from "react";
 
 // Third-party
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { useInfiniteQuery } from "react-query";
+import { isEmpty } from "lodash";
 
 // Components
 import TransfersList from "./TransfersList";
@@ -10,12 +10,12 @@ import TransfersList from "./TransfersList";
 // Context
 import { TransfersContext } from "./context";
 
-import * as PaymentAPI from "src/services/PaymentService";
-
 // Type
 import { RootStackParamList } from "src/navigation";
-import { Transfer, TransferServerData } from "src/types/transfers";
-import { isEmpty } from "lodash";
+import { Transfer } from "src/types/transfers";
+
+// Hooks
+import { useTransfers } from "src/hooks/useTransfers";
 
 type TransferProps = {
   limit?: number;
@@ -24,18 +24,7 @@ type TransferProps = {
 };
 
 const Transfers = (props: TransferProps) => {
-  const transfersQuery = useInfiniteQuery<TransferServerData, Error>(
-    !props.recent ? "transfers" : "recent_transfers",
-    PaymentAPI.fetchTransfers,
-    {
-      getNextPageParam: (lastPage) => {
-        if (lastPage.meta.pageCount > lastPage.meta.page) {
-          return lastPage.meta.page + 1;
-        }
-        return undefined;
-      },
-    }
-  );
+  const transfersQuery = useTransfers({ recent: props.recent });
 
   const { navigate } =
     useNavigation<NavigationProp<RootStackParamList, "Transfers">>();
@@ -72,7 +61,6 @@ const Transfers = (props: TransferProps) => {
     return !isEmpty(props.search)
       ? getSearchData(props?.search ?? "", tranfers ?? [])
       : tranfers;
-    // return tranfers;
   };
 
   return (
