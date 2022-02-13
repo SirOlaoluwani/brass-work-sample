@@ -13,9 +13,6 @@ import { Transfer, TransferServerData } from "src/types/transfers";
 interface TransfersContextProps {
   transfers?: Array<Transfer>;
   isLoadingTransfers: boolean;
-  ListHeaderComponent?:
-    | React.ComponentType<any>
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>;
   onTransferItemPress: (details: Transfer) => void;
   transferQueryStatus: "idle" | "error" | "loading" | "success";
   transferQueryError: Error | null;

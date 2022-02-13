@@ -25,16 +25,6 @@ const Home = ({ navigation }: HomeProps) => {
     navigation.navigate("CreatePayment");
   };
 
-  const renderRTHeader = () => {
-    return (
-      <View style={styles.recentTransactionsHeader}>
-        <Text style={styles.recentTransactionsHeaderText}>
-          Recent Transactions
-        </Text>
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -46,13 +36,15 @@ const Home = ({ navigation }: HomeProps) => {
         <Spacer height={30} />
         <View style={styles.row}>
           <TouchableCard text="View Transactions" onPress={goToTransactions} />
-          <TouchableCard
-            text="Make Payment"
-            onPress={goToCreateNewTransaction}
-          />
+          <TouchableCard text="Send Money" onPress={goToCreateNewTransaction} />
         </View>
         <Spacer height={30} />
-        <TransactionsList ListHeaderComponent={renderRTHeader} recent />
+        <View style={styles.recentTransactionsHeader}>
+          <Text style={styles.recentTransactionsHeaderText}>
+            Recent Transactions
+          </Text>
+        </View>
+        <TransactionsList recent />
       </View>
     </SafeAreaView>
   );

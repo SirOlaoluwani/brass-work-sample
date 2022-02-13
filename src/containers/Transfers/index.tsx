@@ -1,8 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
 // React Native
-import { SafeAreaView, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 
 // Styles
 import { styles } from "./styles";
@@ -21,6 +21,7 @@ type TransfersScreenProps = NativeStackScreenProps<
 >;
 
 const Transfers = (props: TransfersScreenProps) => {
+  const [search, setSearch] = useState("");
   useLayoutEffect(() => {
     props.navigation.setOptions({
       headerLeft: () => <HeaderBackButton onPress={onBackButtonPress} />,
@@ -31,14 +32,15 @@ const Transfers = (props: TransfersScreenProps) => {
     props.navigation.navigate("Home");
   };
 
-  const renderTransactionHeader = () => {
-    return <InputField placeholder="Search reference..." />;
-  };
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <TransfersList ListHeaderComponent={renderTransactionHeader} />
+        <Text allowFontScaling style={styles.searchDescription}>
+          Search for amount, name, account number, description, and date
+        </Text>
+        <InputField placeholder="Search..." onChangeText={setSearch} />
+
+        <TransfersList search={search} />
       </View>
     </SafeAreaView>
   );

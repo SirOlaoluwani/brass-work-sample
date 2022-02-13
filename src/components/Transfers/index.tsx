@@ -1,8 +1,5 @@
 import React from "react";
 
-// Hooks
-import { useTransfers } from "src/hooks/useTransfers";
-
 // Third-party
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useInfiniteQuery } from "react-query";
@@ -18,13 +15,12 @@ import * as PaymentAPI from "src/services/PaymentService";
 // Type
 import { RootStackParamList } from "src/navigation";
 import { Transfer, TransferServerData } from "src/types/transfers";
+import { isEmpty } from "lodash";
 
 type TransferProps = {
   limit?: number;
   recent?: boolean;
-  ListHeaderComponent?:
-    | React.ComponentType<any>
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>;
+  search?: string;
 };
 
 const Transfers = (props: TransferProps) => {
@@ -54,12 +50,36 @@ const Transfers = (props: TransferProps) => {
     }
   };
 
+  const getSearchData = (search: string, transfers: Array<Transfer>) => {
+    const searchText = search.toLowerCase();
+    const newTransfers = transfers.filter((transfer) => {
+      return (
+        `${transfer.amount}`.includes(searchText) ||
+        transfer.reason.toLowerCase().includes(searchText) ||
+        transfer.recipient.name.toLowerCase().includes(searchText) ||
+        transfer.recipient.details.account_number.includes(searchText) ||
+        transfer.status.toLowerCase().includes(searchText)
+      );
+    });
+    return newTransfers;
+  };
+
+  const getTransfersData = () => {
+    const tranfers = transfersQuery.data?.pages
+      ?.map((page) => page.data)
+      .flat();
+
+    return !isEmpty(props.search)
+      ? getSearchData(props?.search ?? "", tranfers ?? [])
+      : tranfers;
+    // return tranfers;
+  };
+
   return (
     <TransfersContext.Provider
       value={{
-        transfers: transfersQuery.data?.pages?.map((page) => page.data).flat(),
+        transfers: getTransfersData(),
         isLoadingTransfers: transfersQuery.isFetching,
-        ListHeaderComponent: props.ListHeaderComponent,
         onTransferItemPress,
         transferQueryStatus: transfersQuery.status,
         transferQueryError: transfersQuery.error,

@@ -21,7 +21,6 @@ import { styles } from "./styles";
 
 const TransfersList = () => {
   const {
-    ListHeaderComponent,
     transfers,
     onTransferItemPress,
     transferQueryStatus,
@@ -70,7 +69,6 @@ const TransfersList = () => {
       data={transfers}
       renderItem={renderTransfers}
       keyExtractor={(_item, index) => `${index}`}
-      ListHeaderComponent={ListHeaderComponent}
       onEndReached={loadMore}
       ListFooterComponent={() => {
         return <ActivityIndicator animating={isFetchingNextPage} />;
